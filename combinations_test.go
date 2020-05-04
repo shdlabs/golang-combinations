@@ -9,62 +9,62 @@ import (
 func TestStringCombinations(t *testing.T) {
 	tt := []struct {
 		name string
-		in   []string
-		out  [][]string
+		in   []rune
+		out  [][]rune
 	}{
 		{
 			name: "Empty slice",
-			in:   []string{},
+			in:   []rune{},
 			out:  nil,
 		},
 		{
 			name: "Single item",
-			in:   []string{"A"},
-			out: [][]string{
-				{"A"},
+			in:   []rune("A"),
+			out: [][]rune{
+				{'A'},
 			},
 		},
 		{
 			name: "Two items",
-			in:   []string{"A", "B"},
-			out: [][]string{
-				{"A"},
-				{"B"},
-				{"A", "B"},
+			in:   []rune("AB"),
+			out: [][]rune{
+				[]rune("A"),
+				[]rune("B"),
+				[]rune("AB"),
 			},
 		},
 		{
 			name: "Three items",
-			in:   []string{"A", "B", "C"},
-			out: [][]string{
-				{"A"},
-				{"B"},
-				{"A", "B"},
-				{"C"},
-				{"A", "C"},
-				{"B", "C"},
-				{"A", "B", "C"},
+			in:   []rune("ABC"),
+			out: [][]rune{
+				[]rune("A"),
+				[]rune("B"),
+				[]rune("AB"),
+				[]rune("C"),
+				[]rune("AC"),
+				[]rune("BC"),
+				[]rune("ABC"),
 			},
 		},
 		{
 			name: "Four items",
-			in:   []string{"A", "B", "C", "D"},
-			out: [][]string{
-				{"A"},
-				{"B"},
-				{"A", "B"},
-				{"C"},
-				{"A", "C"},
-				{"B", "C"},
-				{"A", "B", "C"},
-				{"D"},
-				{"A", "D"},
-				{"B", "D"},
-				{"A", "B", "D"},
-				{"C", "D"},
-				{"A", "C", "D"},
-				{"B", "C", "D"},
-				{"A", "B", "C", "D"},
+			in:   []rune("ABCD"),
+			out: [][]rune{
+				[]rune("A"),
+				[]rune("B"),
+				[]rune("AB"),
+				[]rune("C"),
+				[]rune("AC"),
+				[]rune("BC"),
+				[]rune("ABC"),
+				[]rune("D"),
+				[]rune("AD"),
+				[]rune("BD"),
+				[]rune("ABD"),
+				[]rune("CD"),
+				[]rune("ACD"),
+				[]rune("BCD"),
+				[]rune("ABCD"),
 			},
 		},
 	}
