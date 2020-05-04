@@ -1,8 +1,9 @@
 package combinations
 
 import (
-	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestStringCombinations(t *testing.T) {
@@ -67,22 +68,14 @@ func TestStringCombinations(t *testing.T) {
 			},
 		},
 	}
+	assert := assert.New(t)
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
 			out := All(tc.in)
-			if !reflect.DeepEqual(out, tc.out) {
-				t.Errorf("error: \nreturn:\t%v\nwant:\t%v", out, tc.out)
-			}
+			assert.Equal(out, tc.out)
 		})
 	}
 }
-
-// func ExampleAll() {
-// 	combinations := All([]rune("ABC"))
-// 	fmt.Println(combinations)
-// 	// Output:
-// 	// [[A] [B] [A B] [C] [A C] [B C] [A B C]]
-// }
 
 func TestStringCombinationsN(t *testing.T) {
 	tt := []struct {
@@ -182,12 +175,23 @@ func TestStringCombinationsN(t *testing.T) {
 			},
 		},
 	}
+	assert := assert.New(t)
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
 			out := Combinations(tc.in, tc.n)
-			if !reflect.DeepEqual(out, tc.out) {
-				t.Errorf("error: \nreturn:\t%v\nwant:\t%v", out, tc.out)
-			}
+			assert.Equal(out, tc.out)
 		})
+	}
+}
+
+func BenchmarkAll(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		All([]rune("ABCD"))
+	}
+}
+
+func BenchmarkCombinations(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		Combinations([]rune("ABCD"), 2)
 	}
 }
