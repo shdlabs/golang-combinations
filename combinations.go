@@ -5,7 +5,7 @@ import "math/bits"
 
 // All returns all combinations for a given string array.
 // This is essentially a powerset of the given set except that the empty set is disregarded.
-func All(set []rune) (subsets [][]rune) {
+func All(set string) (subsets []string) {
 	length := uint(len(set))
 
 	// Go through all possible combinations of objects
@@ -18,18 +18,18 @@ func All(set []rune) (subsets [][]rune) {
 			// by checking if bit 'object' is set in subsetBits
 			if (subsetBits>>object)&1 == 1 {
 				// add object to subset
-				subset = append(subset, set[object])
+				subset = append(subset, []rune(set)[object])
 			}
 		}
 		// add subset to subsets
-		subsets = append(subsets, subset)
+		subsets = append(subsets, string(subset))
 	}
 	return subsets
 }
 
 // Combinations returns combinations of n elements for a given string array.
 // For n < 1, it equals to All and returns all combinations.
-func Combinations(set []rune, n int) (subsets [][]rune) {
+func Combinations(set string, n int) (subsets []string) {
 	length := uint(len(set))
 
 	if n > len(set) {
@@ -50,11 +50,11 @@ func Combinations(set []rune, n int) (subsets [][]rune) {
 			// by checking if bit 'object' is set in subsetBits
 			if (subsetBits>>object)&1 == 1 {
 				// add object to subset
-				subset = append(subset, set[object])
+				subset = append(subset, []rune(set)[object])
 			}
 		}
 		// add subset to subsets
-		subsets = append(subsets, subset)
+		subsets = append(subsets, string(subset))
 	}
 	return subsets
 }

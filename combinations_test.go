@@ -1,71 +1,49 @@
 package combinations
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
+func ExampleAll() {
+	combinations := All("ABC")
+	fmt.Println(combinations)
+	// Output:
+	// [A B AB C AC BC ABC]
+}
 func TestStringCombinations(t *testing.T) {
 	tt := []struct {
 		name string
-		in   []rune
-		out  [][]rune
+		in   string
+		out  []string
 	}{
 		{
 			name: "Empty slice",
-			in:   []rune{},
+			in:   "",
 			out:  nil,
 		},
 		{
 			name: "Single item",
-			in:   []rune("A"),
-			out: [][]rune{
-				{'A'},
-			},
+			in:   "A",
+			out:  []string{"A"},
 		},
 		{
 			name: "Two items",
-			in:   []rune("AB"),
-			out: [][]rune{
-				[]rune("A"),
-				[]rune("B"),
-				[]rune("AB"),
-			},
+			in:   "AB",
+			out:  []string{"A", "B", "AB"},
 		},
 		{
 			name: "Three items",
-			in:   []rune("ABC"),
-			out: [][]rune{
-				[]rune("A"),
-				[]rune("B"),
-				[]rune("AB"),
-				[]rune("C"),
-				[]rune("AC"),
-				[]rune("BC"),
-				[]rune("ABC"),
-			},
+			in:   "ABC",
+			out:  []string{"A", "B", "AB", "C", "AC", "BC", "ABC"},
 		},
 		{
 			name: "Four items",
-			in:   []rune("ABCD"),
-			out: [][]rune{
-				[]rune("A"),
-				[]rune("B"),
-				[]rune("AB"),
-				[]rune("C"),
-				[]rune("AC"),
-				[]rune("BC"),
-				[]rune("ABC"),
-				[]rune("D"),
-				[]rune("AD"),
-				[]rune("BD"),
-				[]rune("ABD"),
-				[]rune("CD"),
-				[]rune("ACD"),
-				[]rune("BCD"),
-				[]rune("ABCD"),
-			},
+			in:   "ABCD",
+			out: []string{"A", "B", "AB", "C", "AC", "BC",
+				"ABC", "D", "AD", "BD", "ABD", "CD", "ACD", "BCD", "ABCD"},
 		},
 	}
 	assert := assert.New(t)
@@ -80,99 +58,68 @@ func TestStringCombinations(t *testing.T) {
 func TestStringCombinationsN(t *testing.T) {
 	tt := []struct {
 		name string
-		in   []rune
+		in   string
 		n    int
-		out  [][]rune
+		out  []string
 	}{
 		{
 			name: "Empty slice",
-			in:   []rune{},
+			in:   "",
 			n:    1,
 			out:  nil,
 		},
 		{
 			name: "Single item",
-			in:   []rune("A"),
+			in:   "A",
 			n:    1,
-			out: [][]rune{
-				[]rune("A"),
-			},
+			out:  []string{"A"},
 		},
 		{
 			name: "Two items, n = 0",
-			in:   []rune("AB"),
+			in:   "AB",
 			n:    0,
-			out: [][]rune{
-				[]rune("A"),
-				[]rune("B"),
-				[]rune("AB"),
-			},
+			out:  []string{"A", "B", "AB"},
 		},
 		{
 			name: "Two items, n = 1",
-			in:   []rune("AB"),
+			in:   "AB",
 			n:    1,
-			out: [][]rune{
-				[]rune("A"),
-				[]rune("B"),
-			},
+			out:  []string{"A", "B"},
 		}, {
 			name: "Two items, n = 2",
-			in:   []rune("AB"),
+			in:   "AB",
 			n:    2,
-			out: [][]rune{
-				[]rune("AB"),
-			},
+			out:  []string{"AB"},
 		},
 		{
 			name: "Three items, n = 0",
-			in:   []rune("ABC"),
+			in:   "ABC",
 			n:    0,
-			out: [][]rune{
-				[]rune("A"),
-				[]rune("B"),
-				[]rune("AB"),
-				[]rune("C"),
-				[]rune("AC"),
-				[]rune("BC"),
-				[]rune("ABC"),
-			},
+			out:  []string{"A", "B", "AB", "C", "AC", "BC", "ABC"},
 		},
 		{
 			name: "Three items, n = 1",
-			in:   []rune("ABC"),
+			in:   "ABC",
 			n:    1,
-			out: [][]rune{
-				[]rune("A"),
-				[]rune("B"),
-				[]rune("C"),
-			},
+			out:  []string{"A", "B", "C"},
 		},
 		{
 			name: "Three items, n = 2",
-			in:   []rune("ABC"),
+			in:   "ABC",
 			n:    2,
-			out: [][]rune{
-				[]rune("AB"),
-				[]rune("AC"),
-				[]rune("BC"),
-			},
+			out:  []string{"AB", "AC", "BC"},
 		},
 		{
 			name: "Three items, n = 3",
-			in:   []rune("ABC"),
+			in:   "ABC",
 			n:    3,
-			out: [][]rune{
-				[]rune("ABC"),
-			},
+			out:  []string{"ABC"},
 		},
 		{
 			name: "Three items, n = 4",
-			in:   []rune("ABC"),
+			in:   "ABC",
 			n:    4,
-			out: [][]rune{
-				[]rune("ABC"),
-			},
+			out:  []string{"ABC"},
 		},
 	}
 	assert := assert.New(t)
@@ -186,12 +133,12 @@ func TestStringCombinationsN(t *testing.T) {
 
 func BenchmarkAll(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		All([]rune("ABCD"))
+		All("ABCD")
 	}
 }
 
 func BenchmarkCombinations(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		Combinations([]rune("ABCD"), 2)
+		Combinations("ABCD", 2)
 	}
 }
