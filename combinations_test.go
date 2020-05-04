@@ -1,7 +1,6 @@
 package combinations
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -78,108 +77,108 @@ func TestStringCombinations(t *testing.T) {
 	}
 }
 
-func ExampleAll() {
-	combinations := All([]string{"A", "B", "C"})
-	fmt.Println(combinations)
-	// Output:
-	// [[A] [B] [A B] [C] [A C] [B C] [A B C]]
-}
+// func ExampleAll() {
+// 	combinations := All([]rune("ABC"))
+// 	fmt.Println(combinations)
+// 	// Output:
+// 	// [[A] [B] [A B] [C] [A C] [B C] [A B C]]
+// }
 
 func TestStringCombinationsN(t *testing.T) {
 	tt := []struct {
 		name string
-		in   []string
+		in   []rune
 		n    int
-		out  [][]string
+		out  [][]rune
 	}{
 		{
 			name: "Empty slice",
-			in:   []string{},
+			in:   []rune{},
 			n:    1,
 			out:  nil,
 		},
 		{
 			name: "Single item",
-			in:   []string{"A"},
+			in:   []rune("A"),
 			n:    1,
-			out: [][]string{
-				{"A"},
+			out: [][]rune{
+				[]rune("A"),
 			},
 		},
 		{
 			name: "Two items, n = 0",
-			in:   []string{"A", "B"},
+			in:   []rune("AB"),
 			n:    0,
-			out: [][]string{
-				{"A"},
-				{"B"},
-				{"A", "B"},
+			out: [][]rune{
+				[]rune("A"),
+				[]rune("B"),
+				[]rune("AB"),
 			},
 		},
 		{
 			name: "Two items, n = 1",
-			in:   []string{"A", "B"},
+			in:   []rune("AB"),
 			n:    1,
-			out: [][]string{
-				{"A"},
-				{"B"},
+			out: [][]rune{
+				[]rune("A"),
+				[]rune("B"),
 			},
 		}, {
 			name: "Two items, n = 2",
-			in:   []string{"A", "B"},
+			in:   []rune("AB"),
 			n:    2,
-			out: [][]string{
-				{"A", "B"},
+			out: [][]rune{
+				[]rune("AB"),
 			},
 		},
 		{
 			name: "Three items, n = 0",
-			in:   []string{"A", "B", "C"},
+			in:   []rune("ABC"),
 			n:    0,
-			out: [][]string{
-				{"A"},
-				{"B"},
-				{"A", "B"},
-				{"C"},
-				{"A", "C"},
-				{"B", "C"},
-				{"A", "B", "C"},
+			out: [][]rune{
+				[]rune("A"),
+				[]rune("B"),
+				[]rune("AB"),
+				[]rune("C"),
+				[]rune("AC"),
+				[]rune("BC"),
+				[]rune("ABC"),
 			},
 		},
 		{
 			name: "Three items, n = 1",
-			in:   []string{"A", "B", "C"},
+			in:   []rune("ABC"),
 			n:    1,
-			out: [][]string{
-				{"A"},
-				{"B"},
-				{"C"},
+			out: [][]rune{
+				[]rune("A"),
+				[]rune("B"),
+				[]rune("C"),
 			},
 		},
 		{
 			name: "Three items, n = 2",
-			in:   []string{"A", "B", "C"},
+			in:   []rune("ABC"),
 			n:    2,
-			out: [][]string{
-				{"A", "B"},
-				{"A", "C"},
-				{"B", "C"},
+			out: [][]rune{
+				[]rune("AB"),
+				[]rune("AC"),
+				[]rune("BC"),
 			},
 		},
 		{
 			name: "Three items, n = 3",
-			in:   []string{"A", "B", "C"},
+			in:   []rune("ABC"),
 			n:    3,
-			out: [][]string{
-				{"A", "B", "C"},
+			out: [][]rune{
+				[]rune("ABC"),
 			},
 		},
 		{
 			name: "Three items, n = 4",
-			in:   []string{"A", "B", "C"},
+			in:   []rune("ABC"),
 			n:    4,
-			out: [][]string{
-				{"A", "B", "C"},
+			out: [][]rune{
+				[]rune("ABC"),
 			},
 		},
 	}
