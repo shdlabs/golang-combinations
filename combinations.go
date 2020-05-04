@@ -7,7 +7,7 @@ import "math/bits"
 // This is essentially a powerset of the given set except that the empty set is disregarded.
 func All(set string) (subsets []string) {
 	length := uint(len(set))
-
+	rset := []rune(set)
 	// Go through all possible combinations of objects
 	// from 1 (only first object in subset) to 2^length (all objects in subset)
 	for subsetBits := 1; subsetBits < (1 << length); subsetBits++ {
@@ -18,7 +18,7 @@ func All(set string) (subsets []string) {
 			// by checking if bit 'object' is set in subsetBits
 			if (subsetBits>>object)&1 == 1 {
 				// add object to subset
-				subset = append(subset, []rune(set)[object])
+				subset = append(subset, rset[object])
 			}
 		}
 		// add subset to subsets
@@ -31,7 +31,7 @@ func All(set string) (subsets []string) {
 // For n < 1, it equals to All and returns all combinations.
 func Combinations(set string, n int) (subsets []string) {
 	length := uint(len(set))
-
+	rset := []rune(set)
 	if n > len(set) {
 		n = len(set)
 	}
@@ -50,7 +50,7 @@ func Combinations(set string, n int) (subsets []string) {
 			// by checking if bit 'object' is set in subsetBits
 			if (subsetBits>>object)&1 == 1 {
 				// add object to subset
-				subset = append(subset, []rune(set)[object])
+				subset = append(subset, rset[object])
 			}
 		}
 		// add subset to subsets
